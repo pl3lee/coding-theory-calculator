@@ -25,13 +25,3 @@ export const decodeHamming = (pcm, word, modulo) => {
     throw new Error("More than one error has occured. Rejected.");
   }
 };
-
-const pcm = new Matrix([
-  [1, 0, 1, 0, 1, 0, 1],
-  [0, 1, 1, 0, 0, 1, 1],
-  [0, 0, 0, 1, 1, 1, 1],
-]);
-
-const word = new Matrix([[0, 1, 1, 1, 1, 1, 0]]);
-const modulo = 2;
-console.log(decodeHamming(pcm, word, modulo));
