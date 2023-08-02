@@ -16,7 +16,7 @@ export const generateSyndromeCosetTable = (pcm, modulo) => {
       const prodString = prod.to1DArray().join("");
       if (syndromeString === prodString) {
         if (!(syndromeString in syndromeCosetTable)) {
-          syndromeCosetTable[syndromeString] = cosetLeader.to1DArray().join("");
+          syndromeCosetTable[syndromeString] = cosetLeader;
         }
       }
     });
@@ -35,15 +35,3 @@ const sortByWeight = (a, b) => {
     return 0;
   }
 };
-
-console.log(
-  generateSyndromeCosetTable(
-    new Matrix([
-      [1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-      [0, 0, 1, 1, 0, 0, 0, 0, 1, 1],
-      [0, 0, 1, 1, 1, 1, 0, 1, 1, 0],
-      [0, 1, 0, 1, 1, 0, 1, 0, 1, 1],
-    ]),
-    2
-  )
-);
