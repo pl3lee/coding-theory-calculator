@@ -1,8 +1,9 @@
 import { Matrix } from "ml-matrix";
 import { findWeight } from "./findWeight.js";
+import { modPositive } from "./modPositive.js";
 
 export const decodeHamming = (pcm, word, modulo) => {
-  const syndrome = pcm.mmul(word.transpose()).mod(modulo);
+  const syndrome = modPositive(pcm.mmul(word.transpose()), modulo);
   const weight = findWeight(syndrome);
   if (weight === 0) {
     return word;
@@ -14,11 +15,11 @@ export const decodeHamming = (pcm, word, modulo) => {
       for (let alpha = 1; alpha < modulo; alpha++) {
         if (
           syndromeString ===
-          Matrix.mul(column, alpha).mod(modulo).to1DArray().join("")
+          modPositive(Matrix.mul(column, alpha), modulo).to1DArray().join("")
         ) {
           const errorVector = Matrix.zeros(1, word.columns);
           errorVector.set(0, i, alpha);
-          return Matrix.sub(word, errorVector).mod(modulo);
+          return modPositive(Matrix.sub(word, errorVector), modulo);
         }
       }
     }

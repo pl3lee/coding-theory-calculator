@@ -1,6 +1,7 @@
 import { Matrix } from "ml-matrix";
 import { generateWords } from "./generateWords.js";
 import { findWeight } from "./findWeight.js";
+import { modPositive } from "./modPositive.js";
 
 export const generateSyndromeCosetTable = (pcm, modulo) => {
   const rows = pcm.rows;
@@ -10,7 +11,7 @@ export const generateSyndromeCosetTable = (pcm, modulo) => {
   potentialCosetLeaders.sort(sortByWeight);
   const syndromeCosetTable = {};
   potentialCosetLeaders.forEach((cosetLeader) => {
-    const prod = pcm.mmul(cosetLeader.transpose()).mod(modulo);
+    const prod = modPositive(pcm.mmul(cosetLeader.transpose()), modulo);
     syndromes.forEach((syndrome) => {
       const syndromeString = syndrome.to1DArray().join("");
       const prodString = prod.to1DArray().join("");
