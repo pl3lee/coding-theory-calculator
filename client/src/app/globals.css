@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {
+  body {
+    @apply w-screen p-0 box-border bg-white text-black min-h-screen flex justify-start flex-col items-center
+  }
+  html {
+    @apply bg-white
+  }
+}
