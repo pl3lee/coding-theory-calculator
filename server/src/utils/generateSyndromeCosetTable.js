@@ -3,7 +3,7 @@ import { generateWords } from "./generateWords.js";
 import { findWeight } from "./findWeight.js";
 import { modPositive } from "./modPositive.js";
 
-export const generateSyndromeCosetTable = (pcm, modulo) => {
+export const generateSyndromeCosetTable = (pcm, modulo, str) => {
   const rows = pcm.rows;
   const columns = pcm.columns;
   const syndromes = generateWords(rows, modulo);
@@ -17,7 +17,9 @@ export const generateSyndromeCosetTable = (pcm, modulo) => {
       const prodString = prod.to1DArray().join("");
       if (syndromeString === prodString) {
         if (!(syndromeString in syndromeCosetTable)) {
-          syndromeCosetTable[syndromeString] = cosetLeader;
+          syndromeCosetTable[syndromeString] = str
+            ? cosetLeader.to1DArray().join("")
+            : cosetLeader;
         }
       }
     });
