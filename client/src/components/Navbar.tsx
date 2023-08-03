@@ -90,10 +90,10 @@ const NavList = () => {
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="w-full">
-      <div className="w-full flex justify-between p-3">
+    <div className="w-1/3 min-h-screen">
+      <div className="w-full flex justify-between p-3 md:hidden">
         <h1 className="text-3xl font-bold">Calculator</h1>
-        <button onClick={() => setOpen(!open)} className="md:hidden">
+        <button onClick={() => setOpen(!open)}>
           <BiMenu fontSize="2rem" />
         </button>
         <Drawer
@@ -115,25 +115,12 @@ const Navbar = () => {
         </Drawer>
       </div>
 
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-        className="hidden md:block"
-      >
+      <div className="hidden md:block mr-3 h-full">
         <Toolbar>
           <h1 className="text-3xl font-bold">Calculators</h1>
         </Toolbar>
-        <Divider />
         <NavList />
-      </Drawer>
+      </div>
     </div>
   );
 };
