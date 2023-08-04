@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 
 const MatrixInput = ({
@@ -7,7 +7,7 @@ const MatrixInput = ({
   setData,
 }: {
   data: number[][];
-  setData: (data: number[][]) => void;
+  setData: React.Dispatch<React.SetStateAction<number[][]>>;
 }) => {
   const rowClasses = `grid-rows-${data.length}`;
   const colClasses = `grid-cols-${data[0].length}`;
@@ -130,7 +130,7 @@ const MatrixInput = ({
                 value={num.toString()}
                 className="w-12 h-12 overflow-x-auto border border-black flex justify-center text-center focus:outline-none rounded-sm"
                 onChange={(e) =>
-                  setData((prevMatrix) => {
+                  setData((prevMatrix: number[][]) => {
                     const newMatrix = [...prevMatrix];
                     newMatrix[i][j] = Number(e.target.value);
                     return newMatrix;
