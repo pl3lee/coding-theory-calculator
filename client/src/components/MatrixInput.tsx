@@ -54,7 +54,7 @@ const MatrixInput = ({
   };
 
   return (
-    <div className="flex flex-col gap-3 items-center w-full md:w-3/5">
+    <div className="flex flex-col gap-3 items-center w-full md:w-3/5 max-h-[70vh]">
       <ul className="flex gap-2 text-lg flex-col w-full">
         <li className="flex gap-2 justify-between">
           <div className="flex justify-start items-center">Rows:</div>
