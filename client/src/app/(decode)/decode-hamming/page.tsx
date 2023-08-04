@@ -32,7 +32,11 @@ const DecodeHamming = () => {
         <Algorithm
           name="Decoding Algorithm for Single-Error Correcting Codes (Hamming Codes)"
           input="PCM $$H$$ and a received word $$r \in V_n(F)$$."
-          steps={["Compute $$s = Hr^T$$", "Blah"]}
+          steps={[
+            "Compute $$s = Hr^T$$",
+            "If $$s = 0$$, then accept $$r$$ as the transmitted word (so $$e = 0$$); STOP",
+            "Compare $$s$$ with the columns of $$H$$. If $$s = \\alpha h_i$$ for some $$i$$, then set $$e = (0, \\ldots 0)$$",
+          ]}
         />
 
         <MatrixInput data={pcm} setData={setPcm} />

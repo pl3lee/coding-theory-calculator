@@ -23,16 +23,16 @@ const Algorithm = ({
       >
         {`Input: ${input}`}
       </ReactMarkdown>
-      <ol>
+      <ol type="1" start={1} className="">
         {steps.map((step, i) => {
           return (
-            <li key={i}>
+            <li key={i} className="flex gap-1">
               <ReactMarkdown
                 remarkPlugins={[remarkMath, remarkGfm]}
                 rehypePlugins={[rehypeKatex]}
                 className="text-gray-800 text-xl font-mono"
               >
-                {`${i}. ${step}`}
+                {`${step}`}
               </ReactMarkdown>
             </li>
           );
