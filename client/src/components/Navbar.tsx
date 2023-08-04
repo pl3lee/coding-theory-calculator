@@ -88,39 +88,54 @@ const NavList = () => {
 };
 
 const Navbar = () => {
+  return (
+    <div className="">
+      <NavbarSmall />
+      <NavbarLarge />
+    </div>
+  );
+};
+
+const NavbarSmall = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="w-1/3 min-h-screen">
-      <div className="w-full flex justify-between p-3 md:hidden">
+    <div className="w-full flex justify-between p-3 md:hidden">
+      <Link href="/">
         <h1 className="text-3xl font-bold">Calculator</h1>
-        <button onClick={() => setOpen(!open)}>
-          <BiMenu fontSize="2rem" />
-        </button>
-        <Drawer
-          sx={{
+      </Link>
+      <button onClick={() => setOpen(!open)}>
+        <BiMenu fontSize="2rem" />
+      </button>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
             width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-              boxSizing: "border-box",
-            },
-          }}
-          open={open}
-          variant="temporary"
-          anchor="left"
-          className="md:hidden"
-          onClick={() => setOpen(!open)}
-        >
-          <NavList />
-        </Drawer>
-      </div>
-
-      <div className="hidden md:block mr-3 h-full">
-        <Toolbar>
-          <h1 className="text-3xl font-bold">Calculators</h1>
-        </Toolbar>
+            boxSizing: "border-box",
+          },
+        }}
+        open={open}
+        variant="temporary"
+        anchor="left"
+        className="md:hidden"
+        onClick={() => setOpen(!open)}
+      >
         <NavList />
-      </div>
+      </Drawer>
+    </div>
+  );
+};
+
+const NavbarLarge = () => {
+  return (
+    <div className="hidden md:block mr-3 h-full w-[30vw] max-w-[300px]">
+      <Toolbar disableGutters className="pl-3">
+        <Link href="/">
+          <h1 className="text-3xl font-bold">Calculators</h1>
+        </Link>
+      </Toolbar>
+      <NavList />
     </div>
   );
 };
