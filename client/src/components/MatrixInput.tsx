@@ -12,6 +12,11 @@ const MatrixInput = ({
   const rowClasses = `grid-rows-${data.length}`;
   const colClasses = `grid-cols-${data[0].length}`;
 
+  const gridStyle = {
+    gridTemplateColumns: `repeat(${data[0].length}, 1fr)`,
+    gridTemplateRows: `repeat(${data.length}, 1fr)`,
+  };
+
   const handleAddRow = () => {
     const newRow = [];
     for (let i = 0; i < data[0].length; i++) {
@@ -49,8 +54,8 @@ const MatrixInput = ({
   };
 
   return (
-    <div className="flex flex-col gap-3 items-center w-full">
-      <ul className="flex gap-2 text-lg flex-col">
+    <div className="flex flex-col gap-3 items-center w-full md:w-3/5">
+      <ul className="flex gap-2 text-lg flex-col w-full">
         <li className="flex gap-2 justify-between">
           <div className="flex justify-start items-center">Rows:</div>
           <div className="flex justify-end gap-2">
@@ -113,7 +118,8 @@ const MatrixInput = ({
         </li>
       </ul>
       <div
-        className={`grid ${rowClasses} ${colClasses} w-fit max-w-[80vh] justify-center items-start gap-2 overflow-auto`}
+        className={`grid max-w-full items-start gap-2 overflow-auto`}
+        style={gridStyle}
       >
         {data.map((row, i) => {
           return row.map((num, j) => {
