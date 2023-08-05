@@ -40,7 +40,7 @@ const DecodeHamming = () => {
             "Report that more than one error has occurred",
           ]}
         />
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 w-full">
           <MatrixInput data={pcm} setData={setPcm} />
           <MatrixInput data={word} setData={setWord} showRowCol={false} />
         </div>

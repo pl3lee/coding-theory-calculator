@@ -56,7 +56,7 @@ const MatrixInput = ({
   };
 
   return (
-    <div className="flex flex-col gap-3 items-center w-full max-w-[90vw] max-h-[70vh] md:w-[50vw]">
+    <div className="flex flex-col gap-3 items-center max-h-[70vh] md:w-[50vw] w-full">
       {showRowCol && (
         <ul className="flex gap-2 text-lg flex-col w-full">
           <li className="flex gap-2 justify-between">
