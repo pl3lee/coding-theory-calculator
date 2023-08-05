@@ -35,7 +35,8 @@ const DecodeHamming = () => {
           steps={[
             "Compute $$s = Hr^T$$",
             "If $$s = 0$$, then accept $$r$$ as the transmitted word (so $$e = 0$$); STOP",
-            "Compare $$s$$ with the columns of $$H$$. If $$s = \\alpha h_i$$ for some $$i$$, then set $$e = (0, \\ldots 0)$$",
+            "Compare $$s$$ with the columns of $$H$$. If $$s = \\alpha h_i$$ for some $$i$$, then set $$e = (0, \\ldots, 0, \\alpha, 0, \\ldots, 0)$$ ($$\\alpha$$ at $$i$$th position), and decode to $$c = r - e$$; STOP",
+            "Report that more than one error has occurred",
           ]}
         />
 
