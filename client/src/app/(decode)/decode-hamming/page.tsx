@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Matrix } from "ml-matrix";
 import MatrixInput from "@/components/MatrixInput";
 import Definition from "@/components/Definition";
+import axios from "axios";
+import { backendURL } from "@/backendURL";
 
 import "katex/dist/katex.min.css"; // `rehype-katex` does not import the CSS for you
 import Algorithm from "@/components/Algorithm";
@@ -12,9 +14,38 @@ const DecodeHamming = () => {
     [0, 0],
     [0, 0],
   ]);
-  const [rows, setRows] = useState<number>(2);
-  const [cols, setCols] = useState<number>(2);
+  // word must have length the same as pcm cols
   const [word, setWord] = useState<number[][]>([[0, 0]]);
+  const [modulo, setModulo] = useState<number>(2);
+
+  useEffect(() => {
+    if (pcm[0].length < word[0].length) {
+      setWord(word.map((row) => row.slice(0, pcm[0].length)));
+    } else if (pcm[0].length > word[0].length) {
+      setWord(
+        word.map((row) => {
+          const newRow = [...row];
+          while (newRow.length < pcm[0].length) {
+            newRow.push(0);
+          }
+          return newRow;
+        })
+      );
+    }
+  }, [pcm]);
+
+  const handleSubmit = () => {
+    axios
+      .post(`${backendURL}/decode/hamming`, {
+        pcm,
+        word,
+        modulo,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="w-full flex justify-center items-start p-2">
@@ -43,6 +74,18 @@ const DecodeHamming = () => {
         <div className="flex flex-col gap-10 w-full">
           <MatrixInput data={pcm} setData={setPcm} />
           <MatrixInput data={word} setData={setWord} showRowCol={false} />
+          <div className="flex gap-2">
+            Modulo:{" "}
+            <input
+              type="number"
+              placeholder="2"
+              value={modulo}
+              onChange={(e) => setModulo(Number(e.target.value))}
+            />
+          </div>
+          <button className="border" onClick={handleSubmit}>
+            Submit
+          </button>
         </div>
       </div>
     </div>
