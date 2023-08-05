@@ -26,8 +26,10 @@ const Algorithm = ({
       <ol type="1" start={1} className="">
         {steps.map((step, i) => {
           return (
-            <li key={i} className="flex gap-3">
-              <span className="font-mono flex text-xl">{i + 1}:</span>
+            <li key={i} className="flex gap-3 align-top">
+              <span className="font-mono flex text-xl text-gray-800">
+                {i + 1}:
+              </span>
               <ReactMarkdown
                 remarkPlugins={[remarkMath, remarkGfm]}
                 rehypePlugins={[rehypeKatex]}
