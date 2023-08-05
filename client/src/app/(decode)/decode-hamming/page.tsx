@@ -14,11 +14,12 @@ const DecodeHamming = () => {
   ]);
   const [rows, setRows] = useState<number>(2);
   const [cols, setCols] = useState<number>(2);
+  const [word, setWord] = useState<number[][]>([[0, 0]]);
 
   return (
-    <div className="w-full flex justify-center items-start">
+    <div className="w-full flex justify-center items-start p-2">
       <div className="p-5 flex flex-col items-center gap-5 max-w-screen-xl">
-        <h1 className="w-full flex justify-center text-5xl font-bold">
+        <h1 className="w-full flex justify-center text-xl md:text-3xl lg:text-5xl font-bold">
           Decoding Hamming Codes
         </h1>
         <Definition
@@ -39,8 +40,10 @@ const DecodeHamming = () => {
             "Report that more than one error has occurred",
           ]}
         />
-
-        <MatrixInput data={pcm} setData={setPcm} />
+        <div className="flex flex-col gap-10">
+          <MatrixInput data={pcm} setData={setPcm} />
+          <MatrixInput data={word} setData={setWord} showRowCol={false} />
+        </div>
       </div>
     </div>
   );
