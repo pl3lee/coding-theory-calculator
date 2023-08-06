@@ -5,15 +5,16 @@ import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 const MatrixInput = ({
   data,
   setData,
-  showRowCol = true,
+  showRow = true,
+  showCol = true,
+  name = "",
 }: {
   data: number[][];
   setData: React.Dispatch<React.SetStateAction<number[][]>>;
-  showRowCol?: boolean;
+  showRow?: boolean;
+  showCol?: boolean;
+  name?: string;
 }) => {
-  const rowClasses = `grid-rows-${data.length}`;
-  const colClasses = `grid-cols-${data[0].length}`;
-
   const gridStyle = {
     gridTemplateColumns: `repeat(${data[0].length}, 1fr)`,
     gridTemplateRows: `repeat(${data.length}, 1fr)`,
@@ -57,8 +58,8 @@ const MatrixInput = ({
 
   return (
     <div className="flex flex-col gap-3 items-center max-h-[70vh] md:w-[50vw] w-full">
-      {showRowCol && (
-        <ul className="flex gap-2 text-lg flex-col w-full">
+      <ul className="flex gap-2 text-lg flex-col w-full">
+        {showRow && (
           <li className="flex gap-2 justify-between">
             <div className="flex justify-end items-center">Rows:</div>
             <div className="flex justify-end gap-2">
@@ -92,6 +93,8 @@ const MatrixInput = ({
               </div>
             </div>
           </li>
+        )}
+        {showCol && (
           <li className="flex gap-2 justify-between">
             <div className="flex justify-end items-center">Columns:</div>
             <div className="flex justify-end gap-2">
@@ -125,32 +128,43 @@ const MatrixInput = ({
               </div>
             </div>
           </li>
-        </ul>
-      )}
-
-      <div
-        className={`grid max-w-full items-start gap-2 overflow-auto`}
-        style={gridStyle}
-      >
-        {data.map((row, i) => {
-          return row.map((num, j) => {
-            return (
-              <input
-                key={`${i}${j}`}
-                type="number"
-                value={num.toString()}
-                className="w-12 h-12 overflow-x-auto border border-black flex justify-center text-center focus:outline-none rounded-sm"
-                onChange={(e) =>
-                  setData((prevMatrix: number[][]) => {
-                    const newMatrix = [...prevMatrix];
-                    newMatrix[i][j] = Number(e.target.value);
-                    return newMatrix;
-                  })
-                }
-              />
-            );
-          });
-        })}
+        )}
+      </ul>
+      <div className="flex gap-2 items-center w-full">
+        {name !== "" ? <span>{name} =</span> : null}
+        <div
+          className="p-1 relative max-w-full"
+          style={{
+            background: `linear-gradient(to right, black 0 calc(20px), white calc(20px) calc(100% - 20px), black calc(100% - 20px) 100%)`,
+          }}
+        >
+          <div
+            className={`grid max-w-full items-start gap-2 overflow-auto bg-white p-5`}
+            style={{
+              ...gridStyle,
+            }}
+          >
+            {data.map((row, i) => {
+              return row.map((num, j) => {
+                return (
+                  <input
+                    key={`${i}${j}`}
+                    type="number"
+                    value={num.toString()}
+                    className="w-12 h-12 overflow-x-auto flex justify-center text-center focus:outline-none"
+                    onChange={(e) =>
+                      setData((prevMatrix: number[][]) => {
+                        const newMatrix = [...prevMatrix];
+                        newMatrix[i][j] = Number(e.target.value);
+                        return newMatrix;
+                      })
+                    }
+                  />
+                );
+              });
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

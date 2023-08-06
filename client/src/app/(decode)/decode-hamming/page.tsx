@@ -72,15 +72,28 @@ const DecodeHamming = () => {
           ]}
         />
         <div className="flex flex-col gap-10 w-full">
-          <MatrixInput data={pcm} setData={setPcm} />
-          <MatrixInput data={word} setData={setWord} showRowCol={false} />
+          <h2 className="text-xl font-bold">1. Input PCM H</h2>
+          <MatrixInput data={pcm} setData={setPcm} name="PCM" />
+          <h2 className="text-xl font-bold">2. Input received word r</h2>
+          <MatrixInput
+            data={word}
+            setData={setWord}
+            showRow={false}
+            showCol={false}
+            name="Word"
+          />
+          <h2 className="text-xl font-bold">3. Input modulo</h2>
           <div className="flex gap-2">
             Modulo:{" "}
             <input
               type="number"
-              placeholder="2"
-              value={modulo}
-              onChange={(e) => setModulo(Number(e.target.value))}
+              onChange={(e) => {
+                if (e.target.value === "") {
+                  setModulo(2);
+                } else {
+                  setModulo(Number(e.target.value));
+                }
+              }}
             />
           </div>
           <button className="border" onClick={handleSubmit}>
