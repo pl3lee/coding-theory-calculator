@@ -17,6 +17,11 @@ const DecodeHamming = () => {
   // word must have length the same as pcm cols
   const [word, setWord] = useState<number[][]>([[0, 0]]);
   const [modulo, setModulo] = useState<number>(2);
+  const [decodeResults, setDecodeResults] = useState<any>({
+    decodedWord: "",
+    loading: false,
+    error: false,
+  });
 
   useEffect(() => {
     if (pcm[0].length < word[0].length) {
@@ -34,7 +39,16 @@ const DecodeHamming = () => {
     }
   }, [pcm]);
 
+  useEffect(() => {
+    handleSubmit();
+  }, [pcm, word, modulo]);
+
   const handleSubmit = () => {
+    setDecodeResults({
+      decodedWord: "",
+      loading: true,
+      error: false,
+    });
     axios
       .post(`${backendURL}/decode/hamming`, {
         pcm,
@@ -42,9 +56,19 @@ const DecodeHamming = () => {
         modulo,
       })
       .then((res) => {
-        console.log(res.data);
+        setDecodeResults({
+          decodedWord: res.data.codeword,
+          loading: false,
+          error: false,
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setDecodeResults({
+          decodedWord: "",
+          loading: false,
+          error: true,
+        });
+      });
   };
 
   return (
@@ -53,52 +77,71 @@ const DecodeHamming = () => {
         <h1 className="w-full flex justify-center text-xl md:text-3xl lg:text-5xl font-bold">
           Decoding Hamming Codes
         </h1>
-        <Definition
-          name="Hamming Code"
-          text={`A Hamming code of order $$r$$ over $$F = GF(q)$$ is an $$(n,k)$$-code over $$F$$ with $$n = \\frac{q^r - 1}{q - 1}$$ and $$k = n - r$$, and with $$PCM$$ $$H_r$$, an $$r \\times n$$ matrix whose columns are scalar multiples of each other.`}
-        />
-        <Definition
-          name="Error Vector"
-          text={`Suppose $$c \\in C$$ is sent and $$r \\in V_n(F)$$ is received. The error vector is $$e = r - c$$.`}
-        />
-        <Algorithm
-          name="Decoding Algorithm for Single-Error Correcting Codes (Hamming Codes)"
-          input="PCM $$H$$ and a received word $$r \in V_n(F)$$."
-          steps={[
-            "Compute $$s = Hr^T$$",
-            "If $$s = 0$$, then accept $$r$$ as the transmitted word (so $$e = 0$$); STOP",
-            "Compare $$s$$ with the columns of $$H$$. If $$s = \\alpha h_i$$ for some $$i$$, then set $$e = (0, \\ldots, 0, \\alpha, 0, \\ldots, 0)$$ ($$\\alpha$$ at $$i$$th position), and decode to $$c = r - e$$; STOP",
-            "Report that more than one error has occurred",
-          ]}
-        />
-        <div className="flex flex-col gap-10 w-full">
-          <h2 className="text-xl font-bold">1. Input PCM H</h2>
-          <MatrixInput data={pcm} setData={setPcm} name="PCM" />
-          <h2 className="text-xl font-bold">2. Input received word r</h2>
-          <MatrixInput
-            data={word}
-            setData={setWord}
-            showRow={false}
-            showCol={false}
-            name="Word"
+        <div>
+          <Definition
+            name="Hamming Code"
+            text={`A Hamming code of order $$r$$ over $$F = GF(q)$$ is an $$(n,k)$$-code over $$F$$ with $$n = \\frac{q^r - 1}{q - 1}$$ and $$k = n - r$$, and with PCM $$H_r$$, an $$r \\times n$$ matrix whose columns are scalar multiples of each other.`}
           />
-          <h2 className="text-xl font-bold">3. Input modulo</h2>
-          <div className="flex gap-2">
-            Modulo:{" "}
-            <input
-              type="number"
-              onChange={(e) => {
-                if (e.target.value === "") {
-                  setModulo(2);
-                } else {
-                  setModulo(Number(e.target.value));
-                }
-              }}
-            />
+          <Definition
+            name="Error Vector"
+            text={`Suppose $$c \\in C$$ is sent and $$r \\in V_n(F)$$ is received. The error vector is $$e = r - c$$.`}
+          />
+          <Algorithm
+            name="Decoding Algorithm for Single-Error Correcting Codes (Hamming Codes)"
+            input="PCM $$H$$ and a received word $$r \in V_n(F)$$."
+            steps={[
+              "Compute $$s = Hr^T$$",
+              "If $$s = 0$$, then accept $$r$$ as the transmitted word (so $$e = 0$$); STOP",
+              "Compare $$s$$ with the columns of $$H$$. If $$s = \\alpha h_i$$ for some $$i$$, then set $$e = (0, \\ldots, 0, \\alpha, 0, \\ldots, 0)$$ ($$\\alpha$$ at $$i$$th position), and decode to $$c = r - e$$; STOP",
+              "Report that more than one error has occurred",
+            ]}
+          />
+        </div>
+
+        <div className="flex flex-col gap-10 min-w-full max-w-screen-lg bg-gray-900 rounded-xl py-4 text-white">
+          <div className="flex justify-between">
+            <div className="flex flex-col px-10">
+              <h3 className="text-gray-300 text-xl">Decoded Word</h3>
+              <p className="text-white text-3xl font-bold">
+                {decodeResults.error
+                  ? "Word Rejected"
+                  : decodeResults.loading
+                  ? "Calculating..."
+                  : decodeResults.decodedWord}
+              </p>
+            </div>
+
+            <div className="flex justify-between">
+              <div className="flex flex-col px-10">
+                <h3 className="text-gray-300 text-xl">Modulo</h3>
+                <input
+                  type="number"
+                  value={modulo}
+                  className="focus:outline-none text-white bg-gray-900 w-12 h-12 flex justify-center items-center text-center text-3xl"
+                  onChange={(e) => {
+                    setModulo(Number(e.target.value));
+                  }}
+                />
+              </div>
+            </div>
           </div>
-          <button className="border" onClick={handleSubmit}>
-            Submit
-          </button>
+
+          <div className="px-10 flex flex-col gap-10">
+            <div className="flex flex-col gap-5">
+              <h3 className="text-gray-300 text-xl">PCM H</h3>
+              <MatrixInput data={pcm} setData={setPcm} name="PCM" />
+            </div>
+            <div className="flex flex-col gap-5">
+              <h3 className="text-gray-300 text-xl">Received Word r</h3>
+              <MatrixInput
+                data={word}
+                setData={setWord}
+                showRow={false}
+                showCol={false}
+                name="Word"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

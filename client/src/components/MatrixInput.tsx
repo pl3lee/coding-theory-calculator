@@ -57,89 +57,16 @@ const MatrixInput = ({
   };
 
   return (
-    <div className="flex flex-col gap-3 items-center max-h-[70vh] md:w-[50vw] w-full">
-      <ul className="flex gap-2 text-lg flex-col w-full">
-        {showRow && (
-          <li className="flex gap-2 justify-between">
-            <div className="flex justify-end items-center">Rows:</div>
-            <div className="flex justify-end gap-2">
-              <input
-                type="number"
-                value={data.length}
-                onChange={(e) => {
-                  const difference = Number(e.target.value) - data.length;
-                  if (difference > 0) {
-                    for (let i = 0; i < difference; i++) {
-                      handleAddRow();
-                    }
-                  } else if (difference < 0) {
-                    for (let i = 0; i < Math.abs(difference); i++) {
-                      handleRemoveRow();
-                    }
-                  }
-                }}
-                className="focus:outline-none w-[100px] text-right overflow-auto"
-              />
-              <div className="flex flex-col">
-                <button onClick={handleAddRow} className="focus:outline-none">
-                  <AiOutlineArrowUp />
-                </button>
-                <button
-                  onClick={handleRemoveRow}
-                  className="focus:outline-none"
-                >
-                  <AiOutlineArrowDown />
-                </button>
-              </div>
-            </div>
-          </li>
-        )}
-        {showCol && (
-          <li className="flex gap-2 justify-between">
-            <div className="flex justify-end items-center">Columns:</div>
-            <div className="flex justify-end gap-2">
-              <input
-                type="number"
-                value={data[0].length}
-                onChange={(e) => {
-                  const difference = Number(e.target.value) - data[0].length;
-                  if (difference > 0) {
-                    for (let i = 0; i < difference; i++) {
-                      handleAddCol();
-                    }
-                  } else if (difference < 0) {
-                    for (let i = 0; i < Math.abs(difference); i++) {
-                      handleRemoveCol();
-                    }
-                  }
-                }}
-                className="focus:outline-none w-[100px] text-right overflow-auto"
-              />
-              <div className="flex flex-col">
-                <button onClick={handleAddCol} className="focus:outline-none">
-                  <AiOutlineArrowUp />
-                </button>
-                <button
-                  onClick={handleRemoveCol}
-                  className="focus:outline-none"
-                >
-                  <AiOutlineArrowDown />
-                </button>
-              </div>
-            </div>
-          </li>
-        )}
-      </ul>
-      <div className="flex gap-2 items-center w-full">
-        {name !== "" ? <span>{name} =</span> : null}
+    <div className="flex flex-col gap-3 items-center w-full">
+      <div className="flex gap-2 justify-between w-full text-xl items-start">
         <div
-          className="p-1 relative max-w-full"
+          className="p-1 relative max-w-full overflow-auto"
           style={{
-            background: `linear-gradient(to right, black 0 calc(20px), white calc(20px) calc(100% - 20px), black calc(100% - 20px) 100%)`,
+            background: `linear-gradient(to right, white 0 calc(20px), #111827 calc(20px) calc(100% - 20px), white calc(100% - 20px) 100%)`,
           }}
         >
           <div
-            className={`grid max-w-full items-start gap-2 overflow-auto bg-white p-5`}
+            className={`grid max-w-full items-start gap-2 overflow-auto bg-[#111827] p-2 `}
             style={{
               ...gridStyle,
             }}
@@ -151,7 +78,7 @@ const MatrixInput = ({
                     key={`${i}${j}`}
                     type="number"
                     value={num.toString()}
-                    className="w-12 h-12 overflow-x-auto flex justify-center text-center focus:outline-none"
+                    className="w-12 h-12 overflow-x-auto flex justify-center text-center focus:outline-none bg-gray-900 text-xl"
                     onChange={(e) =>
                       setData((prevMatrix: number[][]) => {
                         const newMatrix = [...prevMatrix];
@@ -165,6 +92,53 @@ const MatrixInput = ({
             })}
           </div>
         </div>
+        <div className="flex flex-col gap-2 items-end">
+          {showRow && (
+            <ChangeDim
+              dim={data.length}
+              addDim={handleAddRow}
+              removeDim={handleRemoveRow}
+              name="Rows"
+            />
+          )}
+          {showCol && (
+            <ChangeDim
+              dim={data[0].length}
+              addDim={handleAddCol}
+              removeDim={handleRemoveCol}
+              name="Columns"
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ChangeDim = ({
+  dim,
+  addDim,
+  removeDim,
+  name,
+}: {
+  dim: number;
+  addDim: () => void;
+  removeDim: () => void;
+  name: string;
+}) => {
+  return (
+    <div className="flex flex-row gap-2">
+      <div className="flex flex-col justify-center">
+        <div className="text-xl text-gray-300">{name}</div>
+        <div className="text-right">{dim}</div>
+      </div>
+      <div className="flex flex-col gap-2 justify-center">
+        <button onClick={addDim}>
+          <AiOutlineArrowUp />
+        </button>
+        <button onClick={removeDim}>
+          <AiOutlineArrowDown />
+        </button>
       </div>
     </div>
   );
