@@ -98,13 +98,13 @@ const DecodeHamming = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-10 min-w-full max-w-screen-lg bg-gray-900 rounded-xl py-4 text-white">
+        <div className="flex flex-col gap-10 min-w-full max-w-screen-sm md:max-w-screen-md bg-gray-900 rounded-xl py-4 text-white">
           <div className="flex justify-between">
             <div className="flex flex-col px-10">
               <h3 className="text-gray-300 text-xl">Decoded Word</h3>
-              <p className="text-white text-3xl font-bold">
+              <p className="text-white text-3xl font-bold w-full max-w-[10rem] md:max-w-[20rem] lg:max-w-[50rem] overflow-x-scroll py-1 ">
                 {decodeResults.error
-                  ? "Word Rejected"
+                  ? "Rejected"
                   : decodeResults.loading
                   ? "Calculating..."
                   : decodeResults.decodedWord}

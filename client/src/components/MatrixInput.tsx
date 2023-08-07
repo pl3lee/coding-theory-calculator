@@ -57,8 +57,26 @@ const MatrixInput = ({
   };
 
   return (
-    <div className="flex flex-col gap-3 items-center w-full">
-      <div className="flex gap-2 justify-between w-full text-xl items-start">
+    <div className="flex flex-col gap-3 items-center w-[300px] md:w-[500px] lg:w-full">
+      <div className="flex gap-2 justify-between w-full text-xl items-start flex-col lg:flex-row">
+        <div className="flex flex-col gap-0 lg:gap-2 items-start lg:items-end lg:order-last">
+          {showRow && (
+            <ChangeDim
+              dim={data.length}
+              addDim={handleAddRow}
+              removeDim={handleRemoveRow}
+              name="Rows"
+            />
+          )}
+          {showCol && (
+            <ChangeDim
+              dim={data[0].length}
+              addDim={handleAddCol}
+              removeDim={handleRemoveCol}
+              name="Columns"
+            />
+          )}
+        </div>
         <div
           className="p-1 relative max-w-full overflow-auto"
           style={{
@@ -92,24 +110,6 @@ const MatrixInput = ({
             })}
           </div>
         </div>
-        <div className="flex flex-col gap-2 items-end">
-          {showRow && (
-            <ChangeDim
-              dim={data.length}
-              addDim={handleAddRow}
-              removeDim={handleRemoveRow}
-              name="Rows"
-            />
-          )}
-          {showCol && (
-            <ChangeDim
-              dim={data[0].length}
-              addDim={handleAddCol}
-              removeDim={handleRemoveCol}
-              name="Columns"
-            />
-          )}
-        </div>
       </div>
     </div>
   );
@@ -127,18 +127,20 @@ const ChangeDim = ({
   name: string;
 }) => {
   return (
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row lg:flex-row gap-2">
       <div className="flex flex-col justify-center">
-        <div className="text-xl text-gray-300">{name}</div>
-        <div className="text-right">{dim}</div>
+        <div className="text-lg text-gray-300">{name}</div>
       </div>
-      <div className="flex flex-col gap-2 justify-center">
-        <button onClick={addDim}>
-          <AiOutlineArrowUp />
-        </button>
-        <button onClick={removeDim}>
-          <AiOutlineArrowDown />
-        </button>
+      <div className="flex flex-row gap-2 items-center">
+        <div className="text-right text-lg">{dim}</div>
+        <div className="flex flex-col gap-2 justify-center">
+          <button onClick={addDim}>
+            <AiOutlineArrowUp />
+          </button>
+          <button onClick={removeDim}>
+            <AiOutlineArrowDown />
+          </button>
+        </div>
       </div>
     </div>
   );
