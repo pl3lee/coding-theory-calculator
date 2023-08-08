@@ -21,7 +21,7 @@ const Definition = ({ name, text }: { name: string; text: string }) => {
       </AccordionSummary>
       <AccordionDetails>
         <ReactMarkdown
-          remarkPlugins={[remarkMath, remarkGfm]}
+          remarkPlugins={[remarkMath]}
           rehypePlugins={[rehypeKatex]}
           className="text-gray-800 text-xl font-mono"
         >
