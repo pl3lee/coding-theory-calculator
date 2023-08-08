@@ -59,6 +59,7 @@ const DecodeSyndromeCalculator = () => {
         modulo,
       })
       .then((res) => {
+        console.log(res.data);
         setDecodeResults({
           decodedWord: res.data.codeword,
           loading: false,
