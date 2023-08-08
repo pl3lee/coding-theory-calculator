@@ -12,6 +12,7 @@ export const findWeight = (...words) => {
         }
       }
     }
+    if (words.length === 1) return weight;
     minWeight = weight != 0 ? Math.min(minWeight, weight) : minWeight;
   });
   return minWeight;

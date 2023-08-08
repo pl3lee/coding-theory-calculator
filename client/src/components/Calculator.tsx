@@ -3,10 +3,13 @@ const Calculator = ({
   decodeResults,
   modulo,
   setModulo,
+  showModulo = true,
   pcm,
   setPcm,
+  showPCM = true,
   word,
   setWord,
+  showWord = true,
 }: {
   decodeResults: {
     decodedWord: string;
@@ -15,10 +18,13 @@ const Calculator = ({
   };
   modulo: number;
   setModulo: React.Dispatch<React.SetStateAction<number>>;
+  showModulo?: boolean;
   pcm: number[][];
   setPcm: React.Dispatch<React.SetStateAction<number[][]>>;
+  showPCM?: boolean;
   word: number[][];
   setWord: React.Dispatch<React.SetStateAction<number[][]>>;
+  showWord?: boolean;
 }) => {
   return (
     <div className="flex flex-col gap-10 min-w-full max-w-screen-sm md:max-w-screen-md bg-gray-900 rounded-xl py-4 text-white">
@@ -34,38 +40,44 @@ const Calculator = ({
           </p>
         </div>
 
-        <div className="flex justify-between">
-          <div className="flex flex-col px-10">
-            <h3 className="text-gray-300 text-xl">Modulo</h3>
-            <input
-              type="number"
-              value={modulo}
-              className="focus:outline-none text-white bg-gray-900 w-12 h-12 flex justify-center items-center text-center text-3xl"
-              onChange={(e) => {
-                setModulo(Number(e.target.value));
-              }}
-            />
+        {showModulo && (
+          <div className="flex justify-between">
+            <div className="flex flex-col px-10">
+              <h3 className="text-gray-300 text-xl">Modulo</h3>
+              <input
+                type="number"
+                value={modulo}
+                className="focus:outline-none text-white bg-gray-900 w-12 h-12 flex justify-center items-center text-center text-3xl"
+                onChange={(e) => {
+                  setModulo(Number(e.target.value));
+                }}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="px-10 flex flex-col gap-10">
-        <CalculatorItem
-          title="PCM H"
-          matrixInput={<MatrixInput data={pcm} setData={setPcm} name="PCM" />}
-        />
-        <CalculatorItem
-          title="Received Word r"
-          matrixInput={
-            <MatrixInput
-              data={word}
-              setData={setWord}
-              showRow={false}
-              showCol={false}
-              name="Word"
-            />
-          }
-        />
+        {showPCM && (
+          <CalculatorItem
+            title="PCM H"
+            matrixInput={<MatrixInput data={pcm} setData={setPcm} name="PCM" />}
+          />
+        )}
+        {showWord && (
+          <CalculatorItem
+            title="Received Word r"
+            matrixInput={
+              <MatrixInput
+                data={word}
+                setData={setWord}
+                showRow={false}
+                showCol={false}
+                name="Word"
+              />
+            }
+          />
+        )}
       </div>
     </div>
   );
