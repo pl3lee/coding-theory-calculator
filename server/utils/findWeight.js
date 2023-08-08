@@ -1,6 +1,7 @@
 import { Matrix } from "ml-matrix";
 
 export const findWeight = (...words) => {
+  console.log(`decoding ${words[0].to1DArray().join("")}`);
   let minWeight = Number.MAX_SAFE_INTEGER;
   words.forEach((word) => {
     let weight = 0;
@@ -12,23 +13,18 @@ export const findWeight = (...words) => {
         }
       }
     }
-    if (words.length === 1) return weight;
-    minWeight = weight != 0 ? Math.min(minWeight, weight) : minWeight;
+    if (words.length === 1) {
+      minWeight = weight;
+    } else {
+      minWeight = weight != 0 ? Math.min(minWeight, weight) : minWeight;
+    }
   });
   return minWeight;
 };
 
-// const words = [
-//   "00000",
-//   "00110",
-//   "01001",
-//   "01111",
-//   "10011",
-//   "10101",
-//   "11010",
-//   "11100",
-// ];
+// const words = ["010010000000"];
 // const wordsMatrix = words.map(
 //   (word) => new Matrix([word.split("").map((char) => parseInt(char))])
 // );
 // console.log(wordsMatrix);
+// console.log(findWeight(...wordsMatrix));
