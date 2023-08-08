@@ -17,6 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css"
+          rel="stylesheet"
+        />
+      </head>
       <body className={inter.className}>
         <div className="w-full flex flex-col lg:flex-row">
           <Navbar />

@@ -21,14 +21,13 @@ const Definition = ({ name, text }: { name: string; text: string }) => {
         </h2>
       </AccordionSummary>
       <AccordionDetails>
-        {/* <ReactMarkdown
-          remarkPlugins={[remarkMath]}
+        <ReactMarkdown
+          remarkPlugins={[remarkMath, remarkGfm]}
           rehypePlugins={[rehypeKatex]}
           className="text-gray-800 text-xl font-mono"
         >
           {text}
-        </ReactMarkdown> */}
-        {/* <Latex>$$\frac\{1\}\{2\}$$</Latex> */}
+        </ReactMarkdown>
       </AccordionDetails>
     </Accordion>
   );

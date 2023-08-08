@@ -25,7 +25,7 @@ const Calculator = ({
       <div className="flex justify-between">
         <div className="flex flex-col px-10">
           <h3 className="text-gray-300 text-xl">Decoded Word</h3>
-          <p className="text-white text-3xl font-bold w-full max-w-[10rem] md:max-w-[20rem] lg:max-w-[50rem] overflow-x-scroll py-1 ">
+          <p className="text-white text-3xl font-bold w-full max-w-[10rem] md:max-w-[20rem] lg:max-w-[50rem] overflow-x-auto py-1 ">
             {decodeResults.error
               ? "Rejected"
               : decodeResults.loading
