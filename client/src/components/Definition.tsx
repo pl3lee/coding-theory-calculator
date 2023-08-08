@@ -6,6 +6,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Latex from "react-latex";
 const Definition = ({ name, text }: { name: string; text: string }) => {
   return (
     <Accordion className="bg-teal-50 w-full">
@@ -20,13 +21,14 @@ const Definition = ({ name, text }: { name: string; text: string }) => {
         </h2>
       </AccordionSummary>
       <AccordionDetails>
-        <ReactMarkdown
+        {/* <ReactMarkdown
           remarkPlugins={[remarkMath]}
           rehypePlugins={[rehypeKatex]}
           className="text-gray-800 text-xl font-mono"
         >
           {text}
-        </ReactMarkdown>
+        </ReactMarkdown> */}
+        {/* <Latex>$$\frac\{1\}\{2\}$$</Latex> */}
       </AccordionDetails>
     </Accordion>
   );
