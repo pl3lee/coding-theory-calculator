@@ -66,11 +66,17 @@ const HammingDistanceCalculator = () => {
   );
 };
 
-const WordInput = ({ word }: { word: number[] }) => {
+const WordInput = ({
+  word,
+  setWord,
+}: {
+  word: number[][];
+  setWord: React.Dispatch<React.SetStateAction<number[][]>>;
+}) => {
   return (
     <MatrixInput
-      data={[word]}
-      setData={() => {}}
+      data={word}
+      setData={setWord}
       showRow={false}
       showCol={false}
     />
@@ -79,12 +85,14 @@ const WordInput = ({ word }: { word: number[] }) => {
 
 const WordsInput = ({
   words,
+  setWords,
   handleAddWord,
   handleRemoveWord,
   handleAddCol,
   handleRemoveCol,
 }: {
   words: number[][];
+  setWords: React.Dispatch<React.SetStateAction<number[][]>>;
   handleAddWord: () => void;
   handleRemoveWord: () => void;
   handleAddCol: () => void;
@@ -110,7 +118,7 @@ const WordsInput = ({
         {words.map((word, index) => {
           return (
             <div key={index}>
-              <WordInput word={word} />
+              <WordInput word={[word]} setWord={} />
             </div>
           );
         })}
