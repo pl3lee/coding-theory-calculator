@@ -1,5 +1,6 @@
 import Definition from "@/components/Definition";
 import Algorithm from "@/components/Algorithm";
+import HammingDistanceCalculator from "./components/HammingDistanceCalculator";
 
 const CalculateHamming = () => {
   return (
@@ -14,7 +15,7 @@ const CalculateHamming = () => {
             text="The Hamming distance between two strings of equal length is the number of coordinate positions in which they differ. The hamming distance of a code is the minimum Hamming distance between any two distinct codewords."
           />
         </div>
-        {/* <DecodeC24Calculator /> */}
+        <HammingDistanceCalculator />
       </div>
     </div>
   );
