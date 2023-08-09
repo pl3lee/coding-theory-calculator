@@ -1,7 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { backendURL } from "@/backendURL";
 import Decoder from "@/components/Decoder";
 import useDecode from "../../hooks/useDecode";
 
