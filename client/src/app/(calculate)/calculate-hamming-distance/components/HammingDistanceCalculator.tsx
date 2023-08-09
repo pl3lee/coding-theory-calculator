@@ -5,7 +5,10 @@ import MatrixInput from "@/components/MatrixInput";
 import ChangeDim from "@/components/ChangeDim";
 
 const HammingDistanceCalculator = () => {
-  const [words, setWords] = useState<number[][]>([[0]]);
+  const [words, setWords] = useState<number[][]>([
+    [0, 0],
+    [0, 0],
+  ]);
   const [result, setResult] = useState<string>("0");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -53,6 +56,7 @@ const HammingDistanceCalculator = () => {
           item: (
             <WordsInput
               words={words}
+              setWords={setWords}
               handleAddCol={handleAddCol}
               handleAddWord={handleAddWord}
               handleRemoveCol={handleRemoveCol}
@@ -68,15 +72,24 @@ const HammingDistanceCalculator = () => {
 
 const WordInput = ({
   word,
-  setWord,
+  idx,
+  changeWord,
 }: {
   word: number[][];
-  setWord: React.Dispatch<React.SetStateAction<number[][]>>;
+  idx: number;
+  changeWord: (word: number[][], index: number) => void;
 }) => {
+  const [currWord, setCurrWord] = useState<number[][]>(word);
+  useEffect(() => {
+    changeWord(currWord, idx);
+  }, [currWord]);
+  useEffect(() => {
+    console.log(idx, currWord);
+  }, [currWord]);
   return (
     <MatrixInput
       data={word}
-      setData={setWord}
+      setData={setCurrWord}
       showRow={false}
       showCol={false}
     />
@@ -98,6 +111,13 @@ const WordsInput = ({
   handleAddCol: () => void;
   handleRemoveCol: () => void;
 }) => {
+  const handleWordChange = (word: number[][], index: number) => {
+    const newWords: number[][] = [...words];
+    console.log(word);
+    newWords[index] = word[0];
+    setWords(newWords);
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
@@ -118,7 +138,11 @@ const WordsInput = ({
         {words.map((word, index) => {
           return (
             <div key={index}>
-              <WordInput word={[word]} setWord={} />
+              <WordInput
+                word={[word]}
+                idx={index}
+                changeWord={handleWordChange}
+              />
             </div>
           );
         })}
