@@ -61,7 +61,7 @@ const Decoder = ({
         {showPCM && (
           <DecoderItem
             title="PCM H"
-            matrixInput={<MatrixInput data={pcm} setData={setPcm} name="PCM" />}
+            matrixInput={<MatrixInput data={pcm} setData={setPcm} />}
           />
         )}
         {showWord && (
@@ -73,7 +73,6 @@ const Decoder = ({
                 setData={setWord}
                 showRow={false}
                 showCol={false}
-                name="Word"
               />
             }
           />

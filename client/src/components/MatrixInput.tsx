@@ -7,13 +7,11 @@ const MatrixInput = ({
   setData,
   showRow = true,
   showCol = true,
-  name = "",
 }: {
   data: number[][];
   setData: React.Dispatch<React.SetStateAction<number[][]>>;
   showRow?: boolean;
   showCol?: boolean;
-  name?: string;
 }) => {
   const gridStyle = {
     gridTemplateColumns: `repeat(${data[0].length}, 1fr)`,
