@@ -1,17 +1,13 @@
-"use client";
-import { useEffect, useState } from "react";
+"use client"
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { backendURL } from "@/backendURL";
-import Decoder from "@/components/Decoder";
 
-const DecodeHammingCalculator = () => {
-  const [pcm, setPcm] = useState<number[][]>([
-    [0, 0],
-    [0, 0],
-  ]);
+const useDecode = ({initialPcm, initialWord, initialModulo, endpoint}: {initialPcm: number[][], initialWord: number[][], initialModulo: number, endpoint: string}) => {
+  const [pcm, setPcm] = useState<number[][]>(initialPcm);
   // word must have length the same as pcm cols
-  const [word, setWord] = useState<number[][]>([[0, 0]]);
-  const [modulo, setModulo] = useState<number>(2);
+  const [word, setWord] = useState<number[][]>(initialWord);
+  const [modulo, setModulo] = useState<number>(initialModulo);
   const [decodeResults, setDecodeResults] = useState<any>({
     decodedWord: "",
     loading: false,
@@ -53,10 +49,10 @@ const DecodeHammingCalculator = () => {
       error: false,
     });
     axios
-      .post(`${backendURL}/decode/hamming`, {
-        pcm,
+      .post(`${backendURL}${endpoint}`, {
         word,
-        modulo,
+        pcm,
+        modulo
       })
       .then((res) => {
         setDecodeResults({
@@ -73,17 +69,15 @@ const DecodeHammingCalculator = () => {
         });
       });
   };
-  return (
-    <Decoder
-      decodeResults={decodeResults}
-      modulo={modulo}
-      setModulo={setModulo}
-      pcm={pcm}
-      setPcm={setPcm}
-      word={word}
-      setWord={setWord}
-    />
-  );
-};
+  return {
+    pcm,
+    setPcm,
+    word,
+    setWord,
+    modulo,
+    setModulo,
+    decodeResults,
+  }
+}
 
-export default DecodeHammingCalculator;
+export default useDecode;

@@ -1,5 +1,5 @@
 import MatrixInput from "./MatrixInput";
-const Calculator = ({
+const Decoder = ({
   decodeResults,
   modulo,
   setModulo,
@@ -59,13 +59,13 @@ const Calculator = ({
 
       <div className="px-10 flex flex-col gap-10">
         {showPCM && (
-          <CalculatorItem
+          <DecoderItem
             title="PCM H"
             matrixInput={<MatrixInput data={pcm} setData={setPcm} name="PCM" />}
           />
         )}
         {showWord && (
-          <CalculatorItem
+          <DecoderItem
             title="Received Word r"
             matrixInput={
               <MatrixInput
@@ -83,7 +83,7 @@ const Calculator = ({
   );
 };
 
-const CalculatorItem = ({
+const DecoderItem = ({
   title,
   matrixInput,
 }: {
@@ -98,4 +98,4 @@ const CalculatorItem = ({
   );
 };
 
-export default Calculator;
+export default Decoder;

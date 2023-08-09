@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { backendURL } from "@/backendURL";
-import Calculator from "@/components/Calculator";
+import Decoder from "@/components/Decoder";
 
 const DecodeSyndromeCalculator = () => {
   const [pcm, setPcm] = useState<number[][]>([
@@ -75,7 +75,7 @@ const DecodeSyndromeCalculator = () => {
       });
   };
   return (
-    <Calculator
+    <Decoder
       decodeResults={decodeResults}
       modulo={modulo}
       setModulo={setModulo}
