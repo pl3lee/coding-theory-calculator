@@ -2,11 +2,11 @@ const WordInput = ({
   word,
   setWord,
 }: {
-  word: number[][];
-  setWord: React.Dispatch<React.SetStateAction<number[][]>>;
+  word: number[];
+  setWord: (word: number[]) => void;
 }) => {
   const gridStyle = {
-    gridTemplateColumns: `repeat(${word[0].length}, 1fr)`,
+    gridTemplateColumns: `repeat(${word.length}, 1fr)`,
     gridTemplateRows: `repeat(1, 1fr)`,
   };
 
@@ -17,20 +17,18 @@ const WordInput = ({
         ...gridStyle,
       }}
     >
-      {word[0].map((num, j) => {
+      {word.map((num, j) => {
         return (
           <input
             key={`${j}`}
             type="number"
             value={num.toString()}
             className="w-12 h-12 overflow-x-auto flex justify-center text-center focus:outline-none bg-gray-900 text-xl"
-            onChange={(e) =>
-              setWord((prevMatrix: number[][]) => {
-                const newMatrix = [...prevMatrix];
-                newMatrix[0][j] = Number(e.target.value);
-                return newMatrix;
-              })
-            }
+            onChange={(e) => {
+              const newWord = [...word];
+              newWord[j] = parseInt(e.target.value);
+              setWord(newWord);
+            }}
           />
         );
       })}
