@@ -82,7 +82,7 @@ const MatrixInput = ({
           }}
         >
           <div
-            className={`grid max-w-full items-start gap-2 overflow-auto bg-[#111827] p-2 `}
+            className={`grid max-w-full items-start gap-0 overflow-auto bg-[#111827] p-2 `}
             style={{
               ...gridStyle,
             }}
@@ -94,7 +94,7 @@ const MatrixInput = ({
                     key={`${i}${j}`}
                     type="number"
                     value={num.toString()}
-                    className="w-12 h-12 overflow-x-auto flex justify-center text-center focus:outline-none bg-gray-900 text-xl"
+                    className="w-7 h-10 overflow-x-auto flex justify-center text-center focus:outline-none bg-gray-900 text-xl"
                     onChange={(e) =>
                       setData((prevMatrix: number[][]) => {
                         const newMatrix = [...prevMatrix];

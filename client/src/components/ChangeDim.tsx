@@ -14,7 +14,7 @@ const ChangeDim = ({
   return (
     <div className="flex flex-row lg:flex-row gap-2">
       <div className="flex flex-col justify-center">
-        <div className="text-lg text-gray-300">{name}</div>
+        <div className="text-sm text-gray-300">{name}</div>
       </div>
       <div className="flex flex-row gap-2 items-center">
         <div className="text-right text-lg">{dim}</div>

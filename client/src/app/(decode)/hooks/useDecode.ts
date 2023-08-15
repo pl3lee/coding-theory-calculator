@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { backendURL } from "@/backendURL";
+import { useDelayFetch } from "./useDelayFetch";
 
 const useDecode = ({initialPcm, initialWord, initialModulo, endpoint}: {initialPcm: number[][], initialWord: number[][], initialModulo: number, endpoint: string}) => {
   const [pcm, setPcm] = useState<number[][]>(initialPcm);
@@ -29,18 +30,7 @@ const useDecode = ({initialPcm, initialWord, initialModulo, endpoint}: {initialP
       );
     }
   }, [pcm]);
-
-  const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>(null);
-
-  useEffect(() => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    const id = setTimeout(() => {
-      handleSubmit();
-    }, 1000); // delay in milliseconds
-    setTimeoutId(id);
-  }, [pcm, word, modulo]);
+  
 
   const handleSubmit = () => {
     setDecodeResults({
@@ -69,6 +59,8 @@ const useDecode = ({initialPcm, initialWord, initialModulo, endpoint}: {initialP
         });
       });
   };
+
+  useDelayFetch([pcm, word, modulo], handleSubmit)
   return {
     pcm,
     setPcm,
