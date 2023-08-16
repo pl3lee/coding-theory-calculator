@@ -101,7 +101,7 @@ const NavbarSmall = () => {
   return (
     <div className="w-full flex justify-between p-3 lg:hidden">
       <Link href="/">
-        <h1 className="text-3xl font-bold">Calculator</h1>
+        <h1 className="text-3xl font-bold">Coding Theory Calculator</h1>
       </Link>
       <button onClick={() => setOpen(!open)}>
         <BiMenu fontSize="2rem" />
@@ -132,7 +132,7 @@ const NavbarLarge = () => {
     <div className="hidden lg:block mr-3 h-full w-[30vw] max-w-[300px]">
       <Toolbar disableGutters className="pl-3">
         <Link href="/">
-          <h1 className="text-3xl font-bold">Calculators</h1>
+          <h1 className="text-3xl font-bold">Coding Theory Calculator</h1>
         </Link>
       </Toolbar>
       <NavList />
