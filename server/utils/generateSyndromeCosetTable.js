@@ -9,7 +9,6 @@ export const generateSyndromeCosetTable = (pcm, modulo, str) => {
   const syndromes = generateWords(rows, modulo);
   const potentialCosetLeaders = generateWords(columns, modulo);
   potentialCosetLeaders.sort(sortByWeight);
-  // console.log(potentialCosetLeaders);
   const syndromeCosetTable = {};
   potentialCosetLeaders.forEach((cosetLeader) => {
     const prod = modPositive(pcm.mmul(cosetLeader.transpose()), modulo);
@@ -39,15 +38,3 @@ const sortByWeight = (a, b) => {
     return 0;
   }
 };
-
-// console.log(
-//   generateSyndromeCosetTable(
-//     new Matrix([
-//       [1, 1, 1, 0, 0],
-//       [1, 1, 0, 1, 0],
-//       [1, 0, 0, 0, 1],
-//     ]),
-//     2,
-//     true
-//   )
-// );

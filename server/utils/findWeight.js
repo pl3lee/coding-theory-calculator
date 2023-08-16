@@ -17,7 +17,7 @@ const allZeros = (...words) => {
 };
 
 export const findWeight = (...words) => {
-  console.log(`decoding ${words[0].to1DArray().join("")}`);
+  if (words.length === 0) throw Error("Must have at least 1 word");
   let minWeight = Number.MAX_SAFE_INTEGER;
   words.forEach((word) => {
     let weight = 0;
@@ -39,10 +39,3 @@ export const findWeight = (...words) => {
   });
   return minWeight;
 };
-
-// const words = ["010010000000"];
-// const wordsMatrix = words.map(
-//   (word) => new Matrix([word.split("").map((char) => parseInt(char))])
-// );
-// console.log(wordsMatrix);
-// console.log(findWeight(...wordsMatrix));
