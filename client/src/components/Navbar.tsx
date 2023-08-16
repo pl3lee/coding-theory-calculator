@@ -40,7 +40,7 @@ const calculate = [
   },
   {
     name: "Calculate Weight (Generator Matrix)",
-    path: "/calculate-weight-generator-matrix",
+    path: "/calculate-weight-gm",
   },
 ];
 

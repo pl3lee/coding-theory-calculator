@@ -3,6 +3,9 @@ const Calculator = ({
   resultName,
   results,
   calculatorItems,
+  showModulo = false,
+  modulo = null,
+  setModulo = null,
 }: {
   resultName: string;
   results: {
@@ -14,6 +17,9 @@ const Calculator = ({
     item: JSX.Element;
     itemName: string;
   }[];
+  showModulo?: boolean;
+  modulo?: number | null;
+  setModulo?: React.Dispatch<React.SetStateAction<number>> | null;
 }) => {
   return (
     <div className="flex flex-col gap-10 min-w-full max-w-screen-sm md:max-w-screen-md bg-gray-900 rounded-xl py-4 text-white">
@@ -28,6 +34,22 @@ const Calculator = ({
               : results.result}
           </p>
         </div>
+        {showModulo && (
+          <div className="flex justify-between">
+            <div className="flex flex-col px-10">
+              <h3 className="text-gray-300 text-xl">Modulo</h3>
+              <input
+                type="number"
+                value={modulo?.toString()}
+                className="focus:outline-none text-white bg-gray-900 w-12 h-12 flex justify-center items-center text-center text-3xl"
+                onChange={(e) => {
+                  if (setModulo === null) return;
+                  setModulo(Number(e.target.value));
+                }}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="px-10 flex flex-col gap-10">

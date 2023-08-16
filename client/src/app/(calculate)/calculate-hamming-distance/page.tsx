@@ -5,7 +5,7 @@ import HammingDistanceCalculator from "./components/HammingDistanceCalculator";
 const CalculateHamming = () => {
   return (
     <div className="w-full flex justify-center items-start p-2">
-      <div className="p-5 flex flex-col items-center gap-5 max-w-screen-xl">
+      <div className="p-5 flex flex-col items-center gap-5 max-w-screen-xl w-full">
         <h1 className="w-full flex justify-center text-xl md:text-3xl lg:text-5xl font-bold">
           Calculating Hamming Distance
         </h1>

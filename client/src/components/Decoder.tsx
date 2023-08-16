@@ -46,7 +46,7 @@ const Decoder = ({
               <h3 className="text-gray-300 text-xl">Modulo</h3>
               <input
                 type="number"
-                value={modulo}
+                value={modulo.toString()}
                 className="focus:outline-none text-white bg-gray-900 w-12 h-12 flex justify-center items-center text-center text-3xl"
                 onChange={(e) => {
                   setModulo(Number(e.target.value));
