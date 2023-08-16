@@ -53,7 +53,7 @@ const calculate = [
 
 const NavList = () => {
   return (
-    <>
+    <nav>
       <List>
         {decode.map((item, index) => (
           <ListItem key={item.name}>
@@ -83,7 +83,7 @@ const NavList = () => {
           </ListItem>
         ))}
       </List> */}
-    </>
+    </nav>
   );
 };
 
