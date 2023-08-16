@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import WordsInput from "@/components/WordsInput";
 import axios from "axios";
 import { backendURL } from "@/backendURL";
-import { useDelayFetch } from "@/app/(decode)/hooks/useDelayFetch";
+import { useDelayFetch } from "@/app/hooks/useDelayFetch";
 
 const HammingDistanceCalculator = () => {
   const [words, setWords] = useState<number[][]>([

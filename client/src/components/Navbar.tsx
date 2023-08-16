@@ -44,12 +44,12 @@ const calculate = [
   },
 ];
 
-const generate = [
-  {
-    name: "Generate Syndrome Coset Table",
-    path: "/generate-syndrome-coset-table",
-  },
-];
+// const generate = [
+//   {
+//     name: "Generate Syndrome Coset Table",
+//     path: "/generate-syndrome-coset-table",
+//   },
+// ];
 
 const NavList = () => {
   return (
@@ -73,7 +73,7 @@ const NavList = () => {
           </ListItem>
         ))}
       </List>
-      <Divider />
+      {/* <Divider />
       <List>
         {generate.map((item, index) => (
           <ListItem key={item.name}>
@@ -82,7 +82,7 @@ const NavList = () => {
             </Link>
           </ListItem>
         ))}
-      </List>
+      </List> */}
     </>
   );
 };

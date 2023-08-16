@@ -1,6 +1,6 @@
 "use client";
 import Decoder from "@/components/Decoder";
-import useDecode from "../../hooks/useDecode";
+import useDecode from "../../../hooks/useDecode";
 
 const DecodeHammingCalculator = () => {
   const { decodeResults, modulo, setModulo, pcm, setPcm, word, setWord } =
