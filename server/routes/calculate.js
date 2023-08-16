@@ -19,9 +19,7 @@ router.post("/hamming-distance", (req, res) => {
 router.post("/weight/words", (req, res) => {
   const { words } = req.body;
   try {
-    const wordsMatrix = words.map(
-      (word) => new Matrix([word.split("").map((char) => parseInt(char))])
-    );
+    const wordsMatrix = words.map((word) => new Matrix([word]));
     const weight = findWeight(...wordsMatrix);
     res.json({ weight: weight });
   } catch {
