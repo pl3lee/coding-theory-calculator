@@ -2,9 +2,11 @@ import ChangeDim from "./ChangeDim";
 const WordsInput = ({
   words,
   setWords,
+  minimumWords,
 }: {
   words: number[][];
   setWords: React.Dispatch<React.SetStateAction<number[][]>>;
+  minimumWords: number;
 }) => {
   const handleAddWord = () => {
     const newWord = [];
@@ -15,7 +17,7 @@ const WordsInput = ({
     setWords(newWords);
   };
   const handleRemoveWord = () => {
-    if (words.length === 2) return;
+    if (words.length === minimumWords) return;
     const newWords: number[][] = [...words];
     newWords.pop();
     setWords(newWords);

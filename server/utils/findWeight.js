@@ -1,5 +1,21 @@
 import { Matrix } from "ml-matrix";
 
+const allZeros = (...words) => {
+  let allZero = true;
+  words.forEach((word) => {
+    for (let i = 0; i < word.columns; i++) {
+      const col = word.getColumn(i);
+      for (let j = 0; j < col.length; j++) {
+        if (col[j] != 0) {
+          allZero = false;
+          break;
+        }
+      }
+    }
+  });
+  return allZero;
+};
+
 export const findWeight = (...words) => {
   console.log(`decoding ${words[0].to1DArray().join("")}`);
   let minWeight = Number.MAX_SAFE_INTEGER;
@@ -13,7 +29,9 @@ export const findWeight = (...words) => {
         }
       }
     }
-    if (words.length === 1) {
+    if (allZeros(...words)) {
+      minWeight = 0;
+    } else if (words.length === 1) {
       minWeight = weight;
     } else {
       minWeight = weight != 0 ? Math.min(minWeight, weight) : minWeight;

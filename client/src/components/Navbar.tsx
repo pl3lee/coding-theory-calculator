@@ -35,8 +35,8 @@ const calculate = [
     path: "/calculate-hamming-distance",
   },
   {
-    name: "Calculate Weight (Set)",
-    path: "/calculate-weight-set",
+    name: "Calculate Weight (Words)",
+    path: "/calculate-weight-words",
   },
   {
     name: "Calculate Weight (Generator Matrix)",

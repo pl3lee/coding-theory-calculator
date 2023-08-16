@@ -6,11 +6,8 @@ import axios from "axios";
 import { backendURL } from "@/backendURL";
 import { useDelayFetch } from "@/app/(decode)/hooks/useDelayFetch";
 
-const HammingDistanceCalculator = () => {
-  const [words, setWords] = useState<number[][]>([
-    [0, 0],
-    [0, 0],
-  ]);
+const WeightWordsCalculator = () => {
+  const [words, setWords] = useState<number[][]>([[0, 0]]);
   const [result, setResult] = useState<string>("0");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -18,10 +15,10 @@ const HammingDistanceCalculator = () => {
   const handleSubmit = () => {
     setLoading(true);
     axios
-      .post(`${backendURL}/calculate/hamming-distance`, {
+      .post(`${backendURL}/calculate/weight/words`, {
         words,
       })
-      .then((res) => setResult(res.data.hammingDistance))
+      .then((res) => setResult(res.data.weight))
       .catch((err) => {
         console.log(err);
         setError(true);
@@ -33,12 +30,12 @@ const HammingDistanceCalculator = () => {
 
   return (
     <Calculator
-      resultName="Hamming Distance"
+      resultName="Weight (Words)"
       results={{ result, loading, error }}
       calculatorItems={[
         {
           item: (
-            <WordsInput words={words} setWords={setWords} minimumWords={2} />
+            <WordsInput words={words} setWords={setWords} minimumWords={1} />
           ),
           itemName: "Words",
         },
@@ -47,4 +44,4 @@ const HammingDistanceCalculator = () => {
   );
 };
 
-export default HammingDistanceCalculator;
+export default WeightWordsCalculator;
