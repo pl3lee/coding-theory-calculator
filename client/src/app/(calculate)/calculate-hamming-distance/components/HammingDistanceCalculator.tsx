@@ -16,11 +16,10 @@ const HammingDistanceCalculator = () => {
   const [error, setError] = useState<boolean>(false);
 
   const handleSubmit = () => {
-    const strings = words.map((word) => word.join(""));
     setLoading(true);
     axios
       .post(`${backendURL}/calculate/hamming-distance`, {
-        strings,
+        words,
       })
       .then((res) => setResult(res.data.hammingDistance))
       .catch((err) => {
