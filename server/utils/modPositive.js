@@ -13,3 +13,5 @@ export const modPositive = (matrix, modulo) => {
   }
   return modulod;
 };
+
+// console.log(modPositive(new Matrix([[1, 1, 1, 0, 1, 1, -1, 0, -1, 0]]), 3));

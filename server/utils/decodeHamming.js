@@ -11,6 +11,7 @@ export const decodeHamming = (pcm, word, modulo) => {
     const syndromeString = syndrome.to1DArray().join("");
     for (let i = 0; i < pcm.columns; i++) {
       const column = pcm.getColumnVector(i);
+      // console.log(`column ${i}`, column);
       for (let alpha = 1; alpha < modulo; alpha++) {
         if (
           syndromeString ===
@@ -25,3 +26,14 @@ export const decodeHamming = (pcm, word, modulo) => {
     throw new Error("More than one error has occured. Rejected.");
   }
 };
+
+// const pcm = new Matrix([
+//   [1, 0, 0, 1, 1, 0],
+//   [0, 1, 0, 1, 1, 1],
+//   [0, 0, 1, 0, 1, 1],
+// ]);
+
+// const word = new Matrix([[1, 1, 0, 1, 1, 0]]);
+// const modulo = 2;
+// const decoded = decodeHamming(pcm, word, modulo);
+// console.log(decoded);

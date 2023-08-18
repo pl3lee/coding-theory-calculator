@@ -1,23 +1,6 @@
 import { Matrix } from "ml-matrix";
 
-const allZeros = (...words) => {
-  let allZero = true;
-  words.forEach((word) => {
-    for (let i = 0; i < word.columns; i++) {
-      const col = word.getColumn(i);
-      for (let j = 0; j < col.length; j++) {
-        if (col[j] != 0) {
-          allZero = false;
-          break;
-        }
-      }
-    }
-  });
-  return allZero;
-};
-
 export const findWeight = (...words) => {
-  if (words.length === 0) throw Error("Must have at least 1 word");
   let minWeight = Number.MAX_SAFE_INTEGER;
   words.forEach((word) => {
     let weight = 0;
@@ -29,13 +12,22 @@ export const findWeight = (...words) => {
         }
       }
     }
-    if (allZeros(...words)) {
-      minWeight = 0;
-    } else if (words.length === 1) {
-      minWeight = weight;
-    } else {
-      minWeight = weight != 0 ? Math.min(minWeight, weight) : minWeight;
-    }
+    minWeight = weight != 0 ? Math.min(minWeight, weight) : minWeight;
   });
   return minWeight;
 };
+
+// const words = [
+//   "00000",
+//   "00110",
+//   "01001",
+//   "01111",
+//   "10011",
+//   "10101",
+//   "11010",
+//   "11100",
+// ];
+// const wordsMatrix = words.map(
+//   (word) => new Matrix([word.split("").map((char) => parseInt(char))])
+// );
+// console.log(wordsMatrix);
