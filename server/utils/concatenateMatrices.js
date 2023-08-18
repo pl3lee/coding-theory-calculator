@@ -39,14 +39,3 @@ export const concatenateMatrices = (matrix1, matrix2, axis) => {
   }
   return concatenatedMatrix;
 };
-
-// const matrix1 = new Matrix([
-//   [1, 2, 3],
-//   [4, 5, 6],
-// ]);
-// const matrix2 = new Matrix([
-//   [7, 8, 9],
-//   [10, 11, 12],
-// ]);
-// const concatenatedMatrix = concatenateMatrices(matrix1, matrix2, 1);
-// console.log(concatenatedMatrix);

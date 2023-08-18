@@ -35,25 +35,25 @@ const calculate = [
     path: "/calculate-hamming-distance",
   },
   {
-    name: "Calculate Weight (Set)",
-    path: "/calculate-weight-set",
+    name: "Calculate Weight (Words)",
+    path: "/calculate-weight-words",
   },
   {
     name: "Calculate Weight (Generator Matrix)",
-    path: "/calculate-weight-generator-matrix",
+    path: "/calculate-weight-gm",
   },
 ];
 
-const generate = [
-  {
-    name: "Generate Syndrome Coset Table",
-    path: "/generate-syndrome-coset-table",
-  },
-];
+// const generate = [
+//   {
+//     name: "Generate Syndrome Coset Table",
+//     path: "/generate-syndrome-coset-table",
+//   },
+// ];
 
 const NavList = () => {
   return (
-    <>
+    <nav>
       <List>
         {decode.map((item, index) => (
           <ListItem key={item.name}>
@@ -73,7 +73,7 @@ const NavList = () => {
           </ListItem>
         ))}
       </List>
-      <Divider />
+      {/* <Divider />
       <List>
         {generate.map((item, index) => (
           <ListItem key={item.name}>
@@ -82,8 +82,8 @@ const NavList = () => {
             </Link>
           </ListItem>
         ))}
-      </List>
-    </>
+      </List> */}
+    </nav>
   );
 };
 
@@ -99,9 +99,9 @@ const Navbar = () => {
 const NavbarSmall = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="w-full flex justify-between p-3 md:hidden">
+    <div className="w-full flex justify-between p-3 lg:hidden">
       <Link href="/">
-        <h1 className="text-3xl font-bold">Calculator</h1>
+        <h1 className="text-3xl font-bold">Coding Theory Calculator</h1>
       </Link>
       <button onClick={() => setOpen(!open)}>
         <BiMenu fontSize="2rem" />
@@ -118,7 +118,7 @@ const NavbarSmall = () => {
         open={open}
         variant="temporary"
         anchor="left"
-        className="md:hidden"
+        className="lg:hidden"
         onClick={() => setOpen(!open)}
       >
         <NavList />
@@ -129,10 +129,10 @@ const NavbarSmall = () => {
 
 const NavbarLarge = () => {
   return (
-    <div className="hidden md:block mr-3 h-full w-[30vw] max-w-[300px]">
+    <div className="hidden lg:block mr-3 h-full w-[30vw] max-w-[300px]">
       <Toolbar disableGutters className="pl-3">
         <Link href="/">
-          <h1 className="text-3xl font-bold">Calculators</h1>
+          <h1 className="text-3xl font-bold">Coding Theory Calculator</h1>
         </Link>
       </Toolbar>
       <NavList />

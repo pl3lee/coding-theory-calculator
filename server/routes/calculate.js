@@ -7,9 +7,9 @@ import { findWeightGM } from "../utils/findWeightGM.js";
 const router = express.Router();
 
 router.post("/hamming-distance", (req, res) => {
-  const { strings } = req.body;
+  const { words } = req.body;
   try {
-    const hammingDist = hammingDistance(...strings);
+    const hammingDist = hammingDistance(...words);
     res.json({ hammingDistance: hammingDist });
   } catch {
     res.status(400).json({ error: "Invalid input." });
@@ -19,9 +19,7 @@ router.post("/hamming-distance", (req, res) => {
 router.post("/weight/words", (req, res) => {
   const { words } = req.body;
   try {
-    const wordsMatrix = words.map(
-      (word) => new Matrix([word.split("").map((char) => parseInt(char))])
-    );
+    const wordsMatrix = words.map((word) => new Matrix([word]));
     const weight = findWeight(...wordsMatrix);
     res.json({ weight: weight });
   } catch {

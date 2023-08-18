@@ -1,19 +1,17 @@
 "use client";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
-import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import ChangeDim from "./ChangeDim";
 
 const MatrixInput = ({
   data,
   setData,
   showRow = true,
   showCol = true,
-  name = "",
 }: {
   data: number[][];
   setData: React.Dispatch<React.SetStateAction<number[][]>>;
   showRow?: boolean;
   showCol?: boolean;
-  name?: string;
 }) => {
   const gridStyle = {
     gridTemplateColumns: `repeat(${data[0].length}, 1fr)`,
@@ -57,89 +55,34 @@ const MatrixInput = ({
   };
 
   return (
-    <div className="flex flex-col gap-3 items-center max-h-[70vh] md:w-[50vw] w-full">
-      <ul className="flex gap-2 text-lg flex-col w-full">
-        {showRow && (
-          <li className="flex gap-2 justify-between">
-            <div className="flex justify-end items-center">Rows:</div>
-            <div className="flex justify-end gap-2">
-              <input
-                type="number"
-                value={data.length}
-                onChange={(e) => {
-                  const difference = Number(e.target.value) - data.length;
-                  if (difference > 0) {
-                    for (let i = 0; i < difference; i++) {
-                      handleAddRow();
-                    }
-                  } else if (difference < 0) {
-                    for (let i = 0; i < Math.abs(difference); i++) {
-                      handleRemoveRow();
-                    }
-                  }
-                }}
-                className="focus:outline-none w-[100px] text-right overflow-auto"
-              />
-              <div className="flex flex-col">
-                <button onClick={handleAddRow} className="focus:outline-none">
-                  <AiOutlineArrowUp />
-                </button>
-                <button
-                  onClick={handleRemoveRow}
-                  className="focus:outline-none"
-                >
-                  <AiOutlineArrowDown />
-                </button>
-              </div>
-            </div>
-          </li>
-        )}
-        {showCol && (
-          <li className="flex gap-2 justify-between">
-            <div className="flex justify-end items-center">Columns:</div>
-            <div className="flex justify-end gap-2">
-              <input
-                type="number"
-                value={data[0].length}
-                onChange={(e) => {
-                  const difference = Number(e.target.value) - data[0].length;
-                  if (difference > 0) {
-                    for (let i = 0; i < difference; i++) {
-                      handleAddCol();
-                    }
-                  } else if (difference < 0) {
-                    for (let i = 0; i < Math.abs(difference); i++) {
-                      handleRemoveCol();
-                    }
-                  }
-                }}
-                className="focus:outline-none w-[100px] text-right overflow-auto"
-              />
-              <div className="flex flex-col">
-                <button onClick={handleAddCol} className="focus:outline-none">
-                  <AiOutlineArrowUp />
-                </button>
-                <button
-                  onClick={handleRemoveCol}
-                  className="focus:outline-none"
-                >
-                  <AiOutlineArrowDown />
-                </button>
-              </div>
-            </div>
-          </li>
-        )}
-      </ul>
-      <div className="flex gap-2 items-center w-full">
-        {name !== "" ? <span>{name} =</span> : null}
+    <div className="flex flex-col gap-3 items-center w-[300px] md:w-[500px] lg:w-full">
+      <div className="flex gap-2 justify-between w-full text-xl items-start flex-col lg:flex-row">
+        <div className="flex flex-col gap-0 lg:gap-2 items-start lg:items-end lg:order-last">
+          {showRow && (
+            <ChangeDim
+              dim={data.length}
+              addDim={handleAddRow}
+              removeDim={handleRemoveRow}
+              name="Rows"
+            />
+          )}
+          {showCol && (
+            <ChangeDim
+              dim={data[0].length}
+              addDim={handleAddCol}
+              removeDim={handleRemoveCol}
+              name="Columns"
+            />
+          )}
+        </div>
         <div
-          className="p-1 relative max-w-full"
+          className="p-1 relative max-w-full overflow-auto"
           style={{
-            background: `linear-gradient(to right, black 0 calc(20px), white calc(20px) calc(100% - 20px), black calc(100% - 20px) 100%)`,
+            background: `linear-gradient(to right, white 0 calc(20px), #111827 calc(20px) calc(100% - 20px), white calc(100% - 20px) 100%)`,
           }}
         >
           <div
-            className={`grid max-w-full items-start gap-2 overflow-auto bg-white p-5`}
+            className={`grid max-w-full items-start gap-0 overflow-auto bg-[#111827] p-2 `}
             style={{
               ...gridStyle,
             }}
@@ -151,7 +94,7 @@ const MatrixInput = ({
                     key={`${i}${j}`}
                     type="number"
                     value={num.toString()}
-                    className="w-12 h-12 overflow-x-auto flex justify-center text-center focus:outline-none"
+                    className="w-7 h-10 overflow-x-auto flex justify-center text-center focus:outline-none bg-gray-900 text-xl"
                     onChange={(e) =>
                       setData((prevMatrix: number[][]) => {
                         const newMatrix = [...prevMatrix];

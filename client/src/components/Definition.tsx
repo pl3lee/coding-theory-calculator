@@ -2,20 +2,34 @@ import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Latex from "react-latex";
 const Definition = ({ name, text }: { name: string; text: string }) => {
   return (
-    <div className="w-full flex flex-col gap-2 shadow-lg rounded-lg py-4 px-6 mx-auto bg-teal-50">
-      <h2 className="text-2xl font-bold text-gray-900 font-mono">
-        Definition - {name}
-      </h2>
-      <ReactMarkdown
-        remarkPlugins={[remarkMath, remarkGfm]}
-        rehypePlugins={[rehypeKatex]}
-        className="text-gray-800 text-xl font-mono"
+    <Accordion className="bg-teal-50 w-full">
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+        className="w-full border-none"
       >
-        {text}
-      </ReactMarkdown>
-    </div>
+        <h2 className="text-2xl font-bold text-gray-900 font-mono">
+          Definition - {name}
+        </h2>
+      </AccordionSummary>
+      <AccordionDetails>
+        <ReactMarkdown
+          remarkPlugins={[remarkMath, remarkGfm]}
+          rehypePlugins={[rehypeKatex]}
+          className="text-gray-800 text-xl font-mono"
+        >
+          {text}
+        </ReactMarkdown>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 

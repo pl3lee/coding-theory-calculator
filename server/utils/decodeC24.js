@@ -113,9 +113,3 @@ export const decodeC24 = (word) => {
     "s2 differs in more than 2 positions for all rows of B, rejected"
   );
 };
-
-// const word = new Matrix([
-//   [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0],
-// ]);
-
-// console.log(decodeC24(word));
