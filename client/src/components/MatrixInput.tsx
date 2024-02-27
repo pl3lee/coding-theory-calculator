@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState, Dispatch, SetStateAction, useCallback, useMemo } from "react";
 import ChangeDim from "./ChangeDim";
 
 const MatrixInput = ({
@@ -7,11 +7,13 @@ const MatrixInput = ({
   setData,
   showRow = true,
   showCol = true,
+  marshalPasteOfBinaryString = false,
 }: {
   data: number[][];
   setData: React.Dispatch<React.SetStateAction<number[][]>>;
   showRow?: boolean;
   showCol?: boolean;
+  marshalPasteOfBinaryString?: boolean
 }) => {
   const gridStyle = {
     gridTemplateColumns: `repeat(${data[0].length}, 1fr)`,
@@ -54,6 +56,44 @@ const MatrixInput = ({
     setData(newMatrix);
   };
 
+  const [nrows, ncols] = useMemo(
+    () => { 
+      if (data.length == 0) {
+        return [0, 0];
+      } else {
+        return [data.length, data[0].length];
+      }
+    }
+  , [data]) 
+
+  const handlePaste = useCallback((event: React.ClipboardEvent) => {
+    if (!marshalPasteOfBinaryString) {
+      return
+    }
+
+    const pastedData = event.clipboardData.getData('Text').split("").filter(c => c == '0' || c == '1').map(Number);
+    
+    if (pastedData.length != nrows * ncols) {
+      return;
+    }
+
+    const newMatrix: number[][] = [];
+
+    let pastedDataIndex = 0;
+    for (let row_index = 0; row_index < nrows; row_index++) {
+      const row: number[] = [];
+      for (let col_index = 0; col_index < ncols; col_index++) {
+        row.push(pastedData[pastedDataIndex]);
+        pastedDataIndex++;
+      }
+      newMatrix.push(row)
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    setData(newMatrix);
+  }, [setData, nrows, ncols, marshalPasteOfBinaryString]);
+
   return (
     <div className="flex flex-col gap-3 items-center w-[300px] md:w-[500px] lg:w-full">
       <div className="flex gap-2 justify-between w-full text-xl items-start flex-col lg:flex-row">
@@ -95,6 +135,7 @@ const MatrixInput = ({
                     type="number"
                     value={num.toString()}
                     className="w-7 h-10 overflow-x-auto flex justify-center text-center focus:outline-none bg-gray-900 text-xl"
+                    onPaste={handlePaste}
                     onChange={(e) =>
                       setData((prevMatrix: number[][]) => {
                         const newMatrix = [...prevMatrix];
