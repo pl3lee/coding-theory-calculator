@@ -1,6 +1,7 @@
 import Definition from "@/components/Definition";
 import Algorithm from "@/components/Algorithm";
 import DecodeC24Calculator from "./components/DecodeC24Calculator";
+import { Info } from "@/components/Info";
 
 const DecodeC24 = () => {
   return (
@@ -22,6 +23,7 @@ const DecodeC24 = () => {
               "Reject $$r$$",
             ]}
           />
+          <Info info="You can now paste in 24-bit binary strings into the calculator. Simply paste the 24-bit binary string into one of the input boxes, and it will be automatically entered into the calculator!" />
         </div>
         <DecodeC24Calculator />
       </div>

@@ -21,4 +21,18 @@ This website is created using the following technologies:
 
 ## Contribute
 
-Feel free to contribute by creating a pull request, or contact me directly through email at billy.pl.lee@gmail.com.
+To contribute, first fork this repository and clone it to your local machine. Then, run the following commands to start the local backend server:
+```bash
+cd server
+npm install
+npm run dev
+```
+Open a new terminal and run the following commands to start the local frontend server:
+```bash
+cd client
+npm install
+npm run dev
+```
+If you have Docker installed on the local machine, you use VSCode, and you want to avoid conflicting node versions, you can use the Dev Containers extension to open this project in a container. The container already has node installed and is configured to forward ports 3000 and 3001. After you open the project in the dev container, you can run the commands above to start the local backend and frontend servers.
+
+After you have made your changes, push them to your fork and create a pull request. Feel free to reach out to me through email at billy.pl.lee@gmail.com.
