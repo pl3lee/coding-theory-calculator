@@ -1,1 +1,2 @@
-export const backendURL = process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://calculator-backend.billylee.me"
+// export const backendURL = process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://calculator-backend.billylee.me"
+export const backendURL = "https://calculator-backend.billylee.me"
