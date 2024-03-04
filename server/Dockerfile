@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:21-alpine as runner
 COPY . /app
 WORKDIR /app
 RUN npm install
