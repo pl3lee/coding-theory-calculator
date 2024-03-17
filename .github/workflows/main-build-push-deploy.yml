@@ -70,7 +70,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} << 'EOF'
           cd /root/coding-theory-calculator
           echo FRONTEND_IMAGE_TAG=${{ secrets.DOCKER_USERNAME }}/coding-theory-calculator-frontend:${{ github.sha }} > .env
-          echo FRONTEND_IMAGE_TAG=${{ secrets.DOCKER_USERNAME }}/coding-theory-calculator-backend:${{ github.sha }} >> .env
+          echo BACKEND_IMAGE_TAG=${{ secrets.DOCKER_USERNAME }}/coding-theory-calculator-backend:${{ github.sha }} >> .env
           docker compose pull
           docker compose up -d
         EOF
