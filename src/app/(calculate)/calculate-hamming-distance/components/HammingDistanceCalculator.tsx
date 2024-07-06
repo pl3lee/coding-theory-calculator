@@ -3,7 +3,6 @@ import Calculator from "@/components/Calculator";
 import { useState, useEffect } from "react";
 import WordsInput from "@/components/WordsInput";
 import axios from "axios";
-import { backendURL } from "@/backendURL";
 import { useDelayFetch } from "@/app/hooks/useDelayFetch";
 
 const HammingDistanceCalculator = () => {
@@ -18,7 +17,7 @@ const HammingDistanceCalculator = () => {
   const handleSubmit = () => {
     setLoading(true);
     axios
-      .post(`${backendURL}/calculate/hamming-distance`, {
+      .post(`/api/calculate/hamming-distance`, {
         words,
       })
       .then((res) => setResult(res.data.hammingDistance))

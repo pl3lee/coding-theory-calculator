@@ -1,10 +1,9 @@
 "use client"
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { backendURL } from "@/backendURL";
 import { useDelayFetch } from "./useDelayFetch";
 
-const useDecode = ({initialPcm, initialWord, initialModulo, endpoint}: {initialPcm: number[][], initialWord: number[][], initialModulo: number, endpoint: string}) => {
+const useDecode = ({ initialPcm, initialWord, initialModulo, endpoint }: { initialPcm: number[][], initialWord: number[][], initialModulo: number, endpoint: string }) => {
   const [pcm, setPcm] = useState<number[][]>(initialPcm);
   // word must have length the same as pcm cols
   const [word, setWord] = useState<number[][]>(initialWord);
@@ -30,7 +29,7 @@ const useDecode = ({initialPcm, initialWord, initialModulo, endpoint}: {initialP
       );
     }
   }, [pcm]);
-  
+
 
   const handleSubmit = () => {
     setDecodeResults({
@@ -39,7 +38,7 @@ const useDecode = ({initialPcm, initialWord, initialModulo, endpoint}: {initialP
       error: false,
     });
     axios
-      .post(`${backendURL}${endpoint}`, {
+      .post(`/api${endpoint}`, {
         word,
         pcm,
         modulo

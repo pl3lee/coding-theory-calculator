@@ -3,7 +3,6 @@ import Calculator from "@/components/Calculator";
 import { useState, useEffect } from "react";
 import WordsInput from "@/components/WordsInput";
 import axios from "axios";
-import { backendURL } from "@/backendURL";
 import { useDelayFetch } from "@/app/hooks/useDelayFetch";
 import MatrixInput from "@/components/MatrixInput";
 
@@ -17,7 +16,7 @@ const WeightGMCalculator = () => {
   const handleSubmit = () => {
     setLoading(true);
     axios
-      .post(`${backendURL}/calculate/weight/gm`, {
+      .post(`/api/calculate/weight/gm`, {
         gm,
         modulo,
       })
