@@ -1,4 +1,4 @@
-export const addStringsModuloWithCarry = (str1, str2, modulo) => {
+export const addStringsModuloWithCarry = (str1: string, str2: string, modulo: number) => {
   const n = Math.max(str1.length, str2.length);
   let carry = 0;
   let result = "";

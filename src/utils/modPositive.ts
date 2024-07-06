@@ -1,6 +1,6 @@
 import { Matrix } from "ml-matrix";
 
-export const modPositive = (matrix, modulo) => {
+export const modPositive = (matrix: Matrix, modulo: number) => {
   const rows = matrix.rows;
   const columns = matrix.columns;
   const modulod = Matrix.mod(matrix, modulo);
