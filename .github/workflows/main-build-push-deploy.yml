@@ -3,8 +3,7 @@ name: main Build Push Deploy
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build_and_push:
@@ -45,8 +44,8 @@ jobs:
       
     - name: Deploy to DigitalOcean Droplet
       run: |
-        ssh -o StrictHostKeyChecking=no root@${{ secrets.DROPLET_IP }} << 'EOF'
-          cd /root/hosting/coding-theory-calculator
+        ssh -o StrictHostKeyChecking=no billy@${{ secrets.DROPLET_IP }} << 'EOF'
+          cd ~/coding-theory-calculator
           echo IMAGE_TAG=${{ secrets.DOCKER_USERNAME }}/coding-theory-calculator:${{ github.sha }} > .env
           docker compose pull
           docker compose up -d
